@@ -3,7 +3,7 @@ package LabJavaParadigmas_v2;
 /**
  * Clase Pubicacion. Esta clase tiene por objetivo representar una publicacion en una red social.
  * 
- * @version 1.0, 01/07/2021
+ * @version 1.2, 02/07/2021
  * @author Eduardo Abarca
  */
 public class Publicacion
@@ -57,5 +57,5 @@ public class Publicacion
 
 /*
 EVALUAR:
- - Implementar clase PublicacionCompartida, que hara herencia a esta
+ - Implementar clase PublicacionCompartida, que heredara los atributos de esta
 */

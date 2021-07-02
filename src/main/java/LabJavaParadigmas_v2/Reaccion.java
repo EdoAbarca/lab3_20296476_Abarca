@@ -3,7 +3,7 @@ package LabJavaParadigmas_v2;
 /**
  * Clase Reaccion. Esta clase tiene por objetivo representar una reaccion a una publicacion en una red social.
  * 
- * @version 1.0, 01/07/2021
+ * @version 1.2, 02/07/2021
  * @author Eduardo Abarca
  */
 public class Reaccion
@@ -14,19 +14,21 @@ public class Reaccion
     private final int IdPublicacionSeleccionada;
     private final int IdReaccionSeleccionada;
     private final String FechaReaccion;
+    private final String AutorReaccion;
     private final String TipoReaccion;
     private final String ContenidoReaccion;
     
     /* //////////////////////////////////////////////////// METODOS //////////////////////////////////////////////////// */
     
     /* CONSTRUCTOR */
-    public Reaccion(int IdPS, int IdRS, String Fecha, String Tipo, String Contenido)
+    public Reaccion(int IdPS, int IdRS, String Fecha, String Autor, String Tipo, String Contenido)
     {
         this.IdReaccion = IdCorrelativoReacciones;
         IdCorrelativoReacciones++;
         this.IdPublicacionSeleccionada = IdPS;
         this.IdReaccionSeleccionada = IdRS;
         this.FechaReaccion = Fecha;
+        this.AutorReaccion = Autor;
         this.TipoReaccion = Tipo;
         this.ContenidoReaccion = Contenido;
     }
@@ -44,6 +46,9 @@ public class Reaccion
     public String getFechaReaccion()
     {return this.FechaReaccion;}
     
+    public String getAutorReaccion()
+    {return this.AutorReaccion;}
+    
     public String getTipoReaccion()
     {return this.TipoReaccion;}
     
@@ -54,9 +59,9 @@ public class Reaccion
     // Sin setters de momento...
     
     /* METODOS ADICIONALES */
-    /*
+    
     public String reaccionAString()
-    {return "";}*/
+    {return "Id reaccion: " + this.IdReaccion + "\nId publicacion reaccionada: " + this.IdPublicacionSeleccionada + "\nId reaccion seleccionada: " + this.IdReaccionSeleccionada + "\nFecha reaccion: "+ this.FechaReaccion + "\nAutor reaccion: " + this.AutorReaccion + "\nTipo reaccion: "+ this.TipoReaccion + "\nContenido reaccion: "+ this.ContenidoReaccion+"\n\n";}
 }
 
 /*

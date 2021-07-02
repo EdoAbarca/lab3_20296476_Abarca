@@ -5,7 +5,7 @@ import java.util.Calendar;
 /**
  * Clase RedSocial. Esta clase tiene por objetivo representar una red social generica.
  * Aca se encontraran los atributos basicos de una red social, como los metodos necesarios para poder interactuar en ella.
- * @version 1.0, 01/07/2021
+ * @version 1.1, 02/07/2021
  * @author Eduardo Abarca
  */
 public class RedSocial
@@ -30,6 +30,12 @@ public class RedSocial
     }
     
     /* GETTERS */
+    public String getNombreRedSocial()
+    {return this.NombreRedSocial;}
+    
+    public String getFechaRegistroRedSocial()
+    {return this.FechaRegistroRedSocial;}
+    
     public String getUsuarioLogueado()
     {return this.UsuarioLogueado;}
     
@@ -66,18 +72,95 @@ public class RedSocial
         return Integer.toString(Dia)+"/"+Integer.toString(Mes)+"/"+Integer.toString(Anio);
     }
     
+    public boolean ValidarDatosRegistro(String Usuario, String Contrasenia)
+    {
+        System.out.println("Verificando datos a registrar...");
+        boolean UsuarioEnUso = false, ContraseniaEnUso = false, EsPosibleRegistro;
+        for(int i = 0; i < this.ListaUsuarios.size(); i++)
+        {
+            if(this.ListaUsuarios.get(i).getNombreUsuario().equals(Usuario))
+            {
+                System.out.println("Usuario en uso! Registro denegado.");
+                UsuarioEnUso = true;
+                break;
+            }
+            else if (this.ListaUsuarios.get(i).getContrasenia().equals(Contrasenia))
+            {
+                System.out.println("Contrasenia en uso! Registro denegado.");
+                ContraseniaEnUso = true;
+                break;
+            }
+        }
+        EsPosibleRegistro = !(UsuarioEnUso) && !(ContraseniaEnUso);
+        if(EsPosibleRegistro)
+        {System.out.println("Datos disponibles! Registro autorizado.");}
+        return EsPosibleRegistro;
+    }
+    
+    public boolean ValidarCredenciales(String Usuario, String Contrasenia)
+    {
+        System.out.println("Verificando datos de inicio sesion...");
+        boolean ExisteUsuario = false, ContraseniaCoincide = false;
+        for(int i = 0; i < this.ListaUsuarios.size(); i++)
+        {
+            if(this.ListaUsuarios.get(i).getNombreUsuario().equals(Usuario))
+            {
+                System.out.println("Se ha encontrado usuario! Verificando contrasenia...");
+                ExisteUsuario = true;
+                if(this.ListaUsuarios.get(i).getContrasenia().equals(Contrasenia))
+                {
+                    System.out.println("Coincide contrasenia! Acceso autorizado.");
+                    ContraseniaCoincide = true;
+                }
+                else
+                {System.out.println("No coincide contrasenia! Acceso denegado.");}
+                break;
+            }
+        }
+        if(!ExisteUsuario)
+        {System.out.println("No se encontro usuario ingresado! Acceso denegado.");}
+        return ExisteUsuario && ContraseniaCoincide;
+    }
+    
+    public Usuario RetornarDatosUsuarioLogueado()
+    {
+        Usuario DatosUL = null;
+        for(int i = 0; i < this.ListaUsuarios.size(); i++)
+        {
+            if(this.ListaUsuarios.get(i).getNombreUsuario().equals(this.UsuarioLogueado))
+            {DatosUL = this.ListaUsuarios.get(i);}
+        }
+        return DatosUL;
+    }
+    
+    public boolean ValidarDestinosUsuario(ArrayList<String> ListaUsuariosDestino)
+    {
+        return RetornarDatosUsuarioLogueado().EstanDestinosEnContactos(ListaUsuariosDestino);
+    }
+    
+    
+    
     /* /////////////////////////////////////////// REQUERIMIENTOS FUNCIONALES /////////////////////////////////////////// */
-    /*
     
-    public void Register()
-    {}
     
-    public void Login()
-    {}
+    public void Register(String UsuarioARegistrar, String ContraseniaARegistrar)
+    {
+        if(this.ValidarDatosRegistro(UsuarioARegistrar, ContraseniaARegistrar))
+        {
+            Usuario NuevoUsuario = new Usuario(UsuarioARegistrar, ContraseniaARegistrar);
+            this.ListaUsuarios.add(NuevoUsuario);
+        }
+    }
+    
+    public void Login(String UsuarioLogin, String ContraseniaLogin)
+    {
+        if(this.ValidarCredenciales(UsuarioLogin, ContraseniaLogin))
+        {this.AsignarUsuarioLogueado(UsuarioLogin);}
+    }
     
     public void Logout()
     {ExpulsarUsuarioLogueado();}
-    
+    /*
     public void Post()
     {}
     
@@ -104,6 +187,6 @@ public class RedSocial
 /*
 EVALUAR:
  - SEPARAR ESTA CLASE
- - CONVERTIR MIEMBROS DE CLASE EN STATIC
- - DEJAR ACA SOLO LOS REQUERIMIENTOS FUNCIONALES
+ - CONVERTIR MIEMBROS DE CLASE A MANTENER ACA EN STATIC
+ - DE SER POSIBLE, DEJAR ACA SOLO LOS REQUERIMIENTOS FUNCIONALES
 */

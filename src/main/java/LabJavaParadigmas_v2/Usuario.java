@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Clase Usuario. Esta clase tiene por objetivo representar un usuario en una red social.
  * 
- * @version 1.1, 01/07/2021
+ * @version 1.2, 02/07/2021
  * @author Eduardo Abarca
  */
 public class Usuario
@@ -88,5 +88,41 @@ public class Usuario
     public void agregarSeguidor(String Usuario)
     {this.ListaSeguidores.add(Usuario);}
     
+    public boolean EstanDestinosEnContactos(ArrayList<String> ListaUsuariosDestino)
+    {
+        boolean EstanDestinos = true;
+        if(!ListaUsuariosDestino.isEmpty())
+        {
+            for(int i = 0; i < ListaUsuariosDestino.size(); i++)
+            {
+                boolean EstaDestino = false;
+                for(int j = 0; j < this.ListaSeguidos.size(); j++)
+                {
+                    if(ListaUsuariosDestino.get(i).equals(this.ListaSeguidos.get(j)))
+                    {EstaDestino = true;}
+                }
+                if(!EstaDestino)
+                {
+                    System.out.print("El destino "+ListaUsuariosDestino.get(i)+" no esta en la lista de contactos.\n");
+                    EstanDestinos = false;
+                }
+            }
+        }
+        return EstanDestinos;
+    }
     
+    public String UsuarioAString()
+    {
+        String StringDatosUsuario, StringPublicacionesUsuario;
+        StringDatosUsuario = "Id usuario: "+ Integer.toString(this.IdUsuario) + "\nUsuario: "+ this.NombreUsuario;
+        StringPublicacionesUsuario = "\n\nPUBLICACIONES USUARIO:\n";
+        if(this.ListaPublicacionesUsuario.isEmpty())
+        {StringPublicacionesUsuario+= "Sin publicaciones.\n\n";}
+        else
+        {
+            for(int i = 0; i < this.ListaPublicacionesUsuario.size(); i++)
+            {StringPublicacionesUsuario += this.ListaPublicacionesUsuario.get(i).publicacionAString();}
+        }
+        return StringDatosUsuario + StringPublicacionesUsuario;
+    }
 }

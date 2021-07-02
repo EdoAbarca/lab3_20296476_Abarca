@@ -16,7 +16,7 @@ import java.util.Scanner;
 /**
  * Clase Menu.
  * Esta clase tiene por objetivo mostrar los menus interactivos para ejecutar los metodos que respectan a los requerimientos funcionales exigidos por enunciado.
- * @version 1.0, 01/07/2021
+ * @version 1.2, 02/07/2021
  * @author Eduardo Abarca
  */
 public class Menu
@@ -52,7 +52,7 @@ public class Menu
                 ValidezEntrada = false;
             }
         }while(!ValidezEntrada);
-        //Tomar decision de carga en base a opcion ingresada
+        //Tomar decision de carga en base a opcion ingresada (En proceso...)
         
         //Mostrar menu sin login (Modificar esto mas tarde, debe tener como parametro una variable booleana de inicio red social por class)
         boolean RedSocialActiva = true, Login = false;
@@ -136,22 +136,22 @@ public class Menu
                 switch(OpcionEntrada)
                 {
                     case 1:
-                        System.out.println("REALIZAR PUBLICACION.\n");
+                        System.out.println("REALIZAR PUBLICACION (En proceso...).\n");
                         break;
                     case 2:
-                        System.out.println("SEGUIR USUARIO.\n");
+                        System.out.println("SEGUIR USUARIO (En proceso...).\n");
                         break;
                     case 3:
-                        System.out.println("COMPARTIR PUBLICACION.\n");
+                        System.out.println("COMPARTIR PUBLICACION (En proceso...).\n");
                         break;
                     case 4:
-                        System.out.println("VISUALIZAR RED SOCIAL.\n");
+                        System.out.println("VISUALIZAR RED SOCIAL (En proceso...).\n");
                         break;
                     case 5:
-                        System.out.println("OPTATIVA: REALIZAR COMENTARIO.\n");
+                        System.out.println("OPTATIVA: REALIZAR COMENTARIO (En proceso...).\n");
                         break;
                     case 6:
-                        System.out.println("OPTATIVA: DAR LIKE.\n");
+                        System.out.println("OPTATIVA: DAR LIKE (En proceso...).\n");
                         break;
                     case 7:
                         System.out.println("CERRAR SESION.\n");
