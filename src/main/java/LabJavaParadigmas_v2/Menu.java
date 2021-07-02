@@ -4,7 +4,7 @@ Objetivo: Implementar un programa que simule las funcionalidades de una red soci
 Nombre Alumno: Eduardo Abarca
 Seccion: C-3
 Profesor: Daniel Gacitua
-Entrega: Original (29/07/2021)
+Entrega: Original (12/08/2021)
 
 LO PRESENTADO EN ESTE COMMIT ESTA SUJETO A CAMBIOS
 */
@@ -13,10 +13,17 @@ package LabJavaParadigmas_v2;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Clase Menu.
+ * Esta clase tiene por objetivo mostrar los menus interactivos para ejecutar los metodos que respectan a los requerimientos funcionales exigidos por enunciado.
+ * @version 1.0, 01/07/2021
+ * @author Eduardo Abarca
+ */
 public class Menu
 {
-    /**
-     * @param args the command line arguments
+    /** Metodo main
+     * Aca se inicia la ejecucion del programa, mostrando los menus interactivos y ejecutando los requerimientos funcionales en base a la opcion escogida.
+     * @param args los argumentos ingresados por linea de comandos
      */
     public static void main(String[] args)
     {   
