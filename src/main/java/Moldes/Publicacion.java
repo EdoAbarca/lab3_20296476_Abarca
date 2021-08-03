@@ -1,25 +1,32 @@
-package LabJavaParadigmas_v2;
+package Moldes;
+
+import ClasesAbstraidas.Comentario;
+import ClasesAbstraidas.Like;
+import java.util.ArrayList;
 
 /**
  * Clase Pubicacion. Esta clase tiene por objetivo representar una publicacion en una red social.
- * 
- * @version 1.2, 02/07/2021
+ * Clase abstracta, contendra los atributos y metodos a heredar en las clases "PublicacionOriginal" y "PublicacionCompartida"
+ * @version 1.3, 15/07/2021
  * @author Eduardo Abarca
  */
-public class Publicacion
+public abstract class Publicacion
 {
     /* /////////////////////////////////////////////////// ATRIBUTOS /////////////////////////////////////////////////// */
-    private static int IdCorrelativoPublicaciones = 1;
-    private final int IdPublicacion;
-    private final String FechaPublicacion;
-    private final String AutorPublicacion;
-    private final String TipoPublicacion;
-    private final String ContenidoPublicacion;
+    protected static int IdCorrelativoPublicaciones = 1;
+    protected final int IdPublicacion;
+    protected final String FechaPublicacion;
+    protected final String TipoPublicacion;
+    protected final String ContenidoPublicacion;
+    protected final String AutorPublicacion;
+    protected final String CuentaDirigida;
+    protected ArrayList<Comentario> Comentarios;
+    protected ArrayList<Like> Likes;
     
     /* //////////////////////////////////////////////////// METODOS //////////////////////////////////////////////////// */
     
     /* CONSTRUCTOR */
-    public Publicacion(String Fecha, String Usuario, String Tipo, String Contenido)
+    public Publicacion(String Fecha, String Usuario, String Tipo, String Contenido, String Destino)
     {
         this.IdPublicacion = IdCorrelativoPublicaciones;
         IdCorrelativoPublicaciones++;
@@ -27,6 +34,9 @@ public class Publicacion
         this.AutorPublicacion = Usuario;
         this.TipoPublicacion = Tipo;
         this.ContenidoPublicacion = Contenido;
+        this.CuentaDirigida = Destino;
+        this.Likes = new ArrayList<>();
+        this.Comentarios = new ArrayList<>();
     }
     
     /* GETTERS */
@@ -45,17 +55,12 @@ public class Publicacion
     public String getContenidoPublicacion()
     {return this.ContenidoPublicacion;}
     
+    public String getCuentaDirigida()
+    {return this.CuentaDirigida;}
+    
     /* SETTERS */
     // Sin setters de momento...
     
     /* METODOS ADICIONALES */
-    public String publicacionAString()
-    {
-        return "Id pregunta: "+Integer.toString(this.IdPublicacion)+"\nFecha de publicacion: "+this.FechaPublicacion+"\nTipo de publicacion: "+this.TipoPublicacion+"\nContenido publicacion: "+this.ContenidoPublicacion+"\n\n";
-    }
+    
 }
-
-/*
-EVALUAR:
- - Implementar clase PublicacionCompartida, que heredara los atributos de esta
-*/

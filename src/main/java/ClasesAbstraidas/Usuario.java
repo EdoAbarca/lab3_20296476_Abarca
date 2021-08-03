@@ -1,11 +1,12 @@
-package LabJavaParadigmas_v2;
+package ClasesAbstraidas;
 
+import Moldes.Publicacion;
 import java.util.ArrayList;
 
 /**
  * Clase Usuario. Esta clase tiene por objetivo representar un usuario en una red social.
  * 
- * @version 1.2, 02/07/2021
+ * @version 1.3, 15/07/2021
  * @author Eduardo Abarca
  */
 public class Usuario
@@ -18,7 +19,6 @@ public class Usuario
     private ArrayList<String> ListaSeguidos;
     private ArrayList<String> ListaSeguidores;
     private ArrayList<Publicacion> ListaPublicacionesUsuario;
-    private ArrayList<Reaccion> ListaReaccionesPublicaciones; //Evaluar ingreso de este arreglo como miembro de clase de publicacion
     
     /* //////////////////////////////////////////////////// METODOS //////////////////////////////////////////////////// */
     
@@ -32,7 +32,6 @@ public class Usuario
         this.ListaSeguidos = new ArrayList<>();
         this.ListaSeguidores = new ArrayList<>();
         this.ListaPublicacionesUsuario = new ArrayList<>();
-        this.ListaReaccionesPublicaciones = new ArrayList<>();
     }
     
     /* GETTERS */
@@ -46,14 +45,15 @@ public class Usuario
     {return this.Contrasenia;}
     
     /*
-    public Publicacion getPublicacionViaId(int id)
+    public Publicacion getPublicacionPorId(int id)
     {
-        Publicacion PublicacionRetorno;
+        Publicacion PublicacionRetorno = null;
         for(int i = 0; i < this.ListaPublicacionesUsuario.size(); i++)
         {
             if(this.ListaPublicacionesUsuario.get(i).getIdP() == id)
-            {}
+            {PublicacionRetorno = this.ListaPublicacionesUsuario.get(i);}
         }
+        return PublicacionRetorno;
     }*/
     
     /* SETTERS */
@@ -111,6 +111,7 @@ public class Usuario
         return EstanDestinos;
     }
     
+    /*
     public String UsuarioAString()
     {
         String StringDatosUsuario, StringPublicacionesUsuario;
@@ -124,5 +125,5 @@ public class Usuario
             {StringPublicacionesUsuario += this.ListaPublicacionesUsuario.get(i).publicacionAString();}
         }
         return StringDatosUsuario + StringPublicacionesUsuario;
-    }
+    }*/
 }
