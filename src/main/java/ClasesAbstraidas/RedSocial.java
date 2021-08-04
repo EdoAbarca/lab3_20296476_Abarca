@@ -1,6 +1,5 @@
 package ClasesAbstraidas;
 
-
 import java.util.ArrayList;
 import java.util.Calendar;
 /**
@@ -8,6 +7,7 @@ import java.util.Calendar;
  * Aca se encontraran los atributos basicos de una red social, como los metodos necesarios para poder interactuar en ella.
  * @version 1.1, 02/07/2021
  * @author Eduardo Abarca
+ * DETALLE: EN EL ENUNCIADO SE ESPECIFICA QUE ESTA CLASE ES UNA INTERFAZ. INVESTIGAR Y MODIFICAR.
  */
 public class RedSocial
 {

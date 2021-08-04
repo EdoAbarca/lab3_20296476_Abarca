@@ -6,23 +6,26 @@ package Moldes;
  * @version 1.3, 15/07/2021
  * @author Eduardo Abarca
  */
-public class Reaccion
+
+public abstract class Reaccion
 {
     /* /////////////////////////////////////////////////// ATRIBUTOS /////////////////////////////////////////////////// */
     protected static int IdCorrelativoReacciones = 1;
     protected final int IdReaccion;
     protected final int IdPublicacionSeleccionada;
+    protected final int IdReaccionSeleccionada;
     protected final String FechaReaccion;
     protected final String AutorReaccion;
     
     /* //////////////////////////////////////////////////// METODOS //////////////////////////////////////////////////// */
     
     /* CONSTRUCTOR */
-    public Reaccion(int IdPS, String Fecha, String Autor)
+    public Reaccion(int IdPS, int IdRS, String Fecha, String Autor)
     {
         this.IdReaccion = IdCorrelativoReacciones;
         IdCorrelativoReacciones++;
         this.IdPublicacionSeleccionada = IdPS;
+        this.IdReaccionSeleccionada = IdRS;
         this.FechaReaccion = Fecha;
         this.AutorReaccion = Autor;
     }
@@ -33,6 +36,9 @@ public class Reaccion
     
     public int getIdPublicacionSeleccionada()
     {return this.IdPublicacionSeleccionada;}
+    
+    public int getIdReaccionSeleccionada()
+    {return this.IdReaccionSeleccionada;}
     
     public String getFechaReaccion()
     {return this.FechaReaccion;}
@@ -46,9 +52,3 @@ public class Reaccion
     /* METODOS ADICIONALES */
     // Sin metodos adicionales
 }
-
-/*
-EVALUAR:
- - Hacer de esta una clase abstracta
- - Basar esta clase para las clases Comentario y Like
-*/

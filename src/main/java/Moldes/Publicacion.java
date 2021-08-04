@@ -1,13 +1,9 @@
 package Moldes;
 
-import ClasesAbstraidas.Comentario;
-import ClasesAbstraidas.Like;
-import java.util.ArrayList;
-
 /**
- * Clase Pubicacion. Esta clase tiene por objetivo representar una publicacion en una red social.
+ * Clase Publicacion. Esta clase tiene por objetivo representar una publicacion en una red social.
  * Clase abstracta, contendra los atributos y metodos a heredar en las clases "PublicacionOriginal" y "PublicacionCompartida"
- * @version 1.3, 15/07/2021
+ * @version 1.4, 16/07/2021
  * @author Eduardo Abarca
  */
 public abstract class Publicacion
@@ -20,8 +16,6 @@ public abstract class Publicacion
     protected final String ContenidoPublicacion;
     protected final String AutorPublicacion;
     protected final String CuentaDirigida;
-    protected ArrayList<Comentario> Comentarios;
-    protected ArrayList<Like> Likes;
     
     /* //////////////////////////////////////////////////// METODOS //////////////////////////////////////////////////// */
     
@@ -35,8 +29,6 @@ public abstract class Publicacion
         this.TipoPublicacion = Tipo;
         this.ContenidoPublicacion = Contenido;
         this.CuentaDirigida = Destino;
-        this.Likes = new ArrayList<>();
-        this.Comentarios = new ArrayList<>();
     }
     
     /* GETTERS */
@@ -62,5 +54,10 @@ public abstract class Publicacion
     // Sin setters de momento...
     
     /* METODOS ADICIONALES */
+    // Sin metodos adicionales de momento...
     
+    /*
+    ¿Por que esta clase no tiene como atributos un contenedor (ArrayList) de likes y publicaciones?
+    Las clases a heredar deben tener sus PROPIOS contenedores. (Consultar de todos modos por este conflicto)
+    */
 }
