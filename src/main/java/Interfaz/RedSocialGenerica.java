@@ -1,15 +1,20 @@
-package ClasesAbstraidas;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Interfaz;
 
+import ClasesAbstraidas.Usuario;
 import java.util.ArrayList;
 import java.util.Calendar;
+
 /**
- * Clase RedSocial. Esta clase tiene por objetivo representar una red social generica.
- * Aca se encontraran los atributos basicos de una red social, como los metodos necesarios para poder interactuar en ella.
- * @version 1.1, 02/07/2021
- * @author Eduardo Abarca
- * DETALLE: EN EL ENUNCIADO SE ESPECIFICA QUE ESTA CLASE ES UNA INTERFAZ. INVESTIGAR Y MODIFICAR.
+ * Esta clase es la que implementa la interface RedSocial. Traspasar metodos.
+ * @author eduardo
+ * Lo que se vera a continuacion seran los atributos y metodos que en un principio estaban implementados en la clase RedSocial.
  */
-public class RedSocial
+public class RedSocialGenerica implements RedSocial
 {
     /* /////////////////////////////////////////////////// ATRIBUTOS /////////////////////////////////////////////////// */
     private final String NombreRedSocial;
@@ -21,7 +26,7 @@ public class RedSocial
     /* //////////////////////////////////////////////////// METODOS //////////////////////////////////////////////////// */
     
     /* CONSTRUCTOR */
-    public RedSocial(String Nombre, String Fecha)
+    public RedSocialGenerica(String Nombre, String Fecha)
     {
         this.NombreRedSocial = Nombre;
         this.FechaRegistroRedSocial = Fecha;
@@ -44,20 +49,25 @@ public class RedSocial
     {return this.ProgramaEnUso;}
     
     /* SETTERS */
+    @Override
     public void IniciarPrograma()
     {this.ProgramaEnUso = true;}
     
+    @Override
     public void FinalizarPrograma()
     {this.ProgramaEnUso = false;}
     
+    @Override
     public void AsignarUsuarioLogueado(String Usuario)
     {this.UsuarioLogueado = Usuario;}
     
+    @Override
     public void ExpulsarUsuarioLogueado()
     {this.UsuarioLogueado = null;}
     
     /* //////////////////////////////////////////////// METODOS DE APOYO //////////////////////////////////////////////// */
     
+    @Override
     public String FechaDeHoy()
     {
         Calendar calendario = Calendar.getInstance();
@@ -67,12 +77,14 @@ public class RedSocial
         return dia+"/"+mes+"/"+anio;
     }
     
+
     public String Fecha(int Dia, int Mes, int Anio)
     {
         //Aca poner metodo que verificara dominios de la fecha ingresada
         return Integer.toString(Dia)+"/"+Integer.toString(Mes)+"/"+Integer.toString(Anio);
     }
     
+    @Override
     public boolean ValidarDatosRegistro(String Usuario, String Contrasenia)
     {
         System.out.println("Verificando datos a registrar...");
@@ -98,6 +110,7 @@ public class RedSocial
         return EsPosibleRegistro;
     }
     
+    @Override
     public boolean ValidarCredenciales(String Usuario, String Contrasenia)
     {
         System.out.println("Verificando datos de inicio sesion...");
@@ -123,6 +136,7 @@ public class RedSocial
         return ExisteUsuario && ContraseniaCoincide;
     }
     
+    @Override
     public Usuario RetornarDatosUsuarioLogueado()
     {
         Usuario DatosUL = null;
@@ -134,6 +148,7 @@ public class RedSocial
         return DatosUL;
     }
     
+    @Override
     public boolean ValidarDestinosUsuario(ArrayList<String> ListaUsuariosDestino)
     {
         return RetornarDatosUsuarioLogueado().EstanDestinosEnContactos(ListaUsuariosDestino);
@@ -143,7 +158,7 @@ public class RedSocial
     
     /* /////////////////////////////////////////// REQUERIMIENTOS FUNCIONALES /////////////////////////////////////////// */
     
-    
+    @Override
     public void Register(String UsuarioARegistrar, String ContraseniaARegistrar)
     {
         if(this.ValidarDatosRegistro(UsuarioARegistrar, ContraseniaARegistrar))
@@ -153,41 +168,39 @@ public class RedSocial
         }
     }
     
+    @Override
     public void Login(String UsuarioLogin, String ContraseniaLogin)
     {
         if(this.ValidarCredenciales(UsuarioLogin, ContraseniaLogin))
         {this.AsignarUsuarioLogueado(UsuarioLogin);}
     }
     
+    @Override
     public void Logout()
     {ExpulsarUsuarioLogueado();}
-    /*
+    
+    @Override
     public void Post()
     {}
     
+    @Override
     public void Follow()
     {}
     
+    @Override
     public void Share()
     {}
     
+    @Override
     public void Visualize()
     {}
     
+    @Override
     public void Comment()
     {}
     
+    @Override
     public void Like()
     {}
-    */
-    
-}
-//La que tiene el rombo es la que contiene a la otra...
-//Evitar relaciones bidireccionales
 
-/*
-EVALUAR:
- - SEPARAR ESTA CLASE
- - CONVERTIR MIEMBROS DE CLASE A MANTENER ACA EN STATIC
- - DE SER POSIBLE, DEJAR ACA SOLO LOS REQUERIMIENTOS FUNCIONALES
-*/
+}
