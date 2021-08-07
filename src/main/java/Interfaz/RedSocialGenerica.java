@@ -5,14 +5,17 @@
  */
 package Interfaz;
 
+import ClasesAbstraidas.PublicacionOriginal;
 import ClasesAbstraidas.Usuario;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
- * Esta clase es la que implementa la interface RedSocial. Traspasar metodos.
- * @author eduardo
- * Lo que se vera a continuacion seran los atributos y metodos que en un principio estaban implementados en la clase RedSocial.
+ * Clase RedSocial. Esta clase tiene por objetivo representar una red social generica dentro del programa.
+ * Aca se encontraran los atributos basicos de una red social y los metodos necesarios para poder interactuar en ella.
+ * Requerimientos funcionales cubiertos en este archivo.
+ * @version 1.1, 19/07/2021
+ * @author Eduardo Abarca
  */
 public class RedSocialGenerica implements RedSocial
 {
@@ -137,24 +140,52 @@ public class RedSocialGenerica implements RedSocial
     }
     
     @Override
-    public Usuario RetornarDatosUsuarioLogueado()
+    public Usuario getUsuarioViaUsername(String NombreUsuario)
     {
         Usuario DatosUL = null;
         for(int i = 0; i < this.ListaUsuarios.size(); i++)
         {
-            if(this.ListaUsuarios.get(i).getNombreUsuario().equals(this.UsuarioLogueado))
+            if(this.ListaUsuarios.get(i).getNombreUsuario().equals(NombreUsuario))
             {DatosUL = this.ListaUsuarios.get(i);}
         }
         return DatosUL;
     }
     
     @Override
-    public boolean ValidarDestinosUsuario(ArrayList<String> ListaUsuariosDestino)
+    public boolean ValidarDestinos(ArrayList<String> ListaUsuariosDestino)
     {
-        return RetornarDatosUsuarioLogueado().EstanDestinosEnContactos(ListaUsuariosDestino);
+        return getUsuarioViaUsername(this.UsuarioLogueado).EstanDestinosEnContactos(ListaUsuariosDestino);
     }
     
-    
+    @Override
+    public boolean EstaUsuarioEnSeguidos(String UsuarioApuntado) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public PublicacionOriginal getPublicacionViaId(int IdPublicacion) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean ExisteComentario(int IdPublicacion, int IdComentario) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean ExisteLike(int IdPublicacion, int IdLike) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String SocialNetworkToString() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void PrintSocialNetwork(String StringConvertido) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     /* /////////////////////////////////////////// REQUERIMIENTOS FUNCIONALES /////////////////////////////////////////// */
     
@@ -180,27 +211,82 @@ public class RedSocialGenerica implements RedSocial
     {ExpulsarUsuarioLogueado();}
     
     @Override
-    public void Post()
-    {}
+    public void Post(String TipoPublicacion, String ContenidoPublicacion, ArrayList<String> UsuariosDestino)
+    {
+        if(UsuariosDestino.isEmpty()) //No hay usuarios a dirigir publicacion, va para usuario propio
+        {
+            
+        }
+        else
+        {
+            if(ValidarDestinos(UsuariosDestino)) //Destinos estan en contactos de usuario logueado, se destina a crear una publicacion por cada destino
+            {
+                
+            }
+            else //Si no, se muestra mensaje con error
+            {
+                
+            }
+        }
+    }
     
     @Override
-    public void Follow()
-    {}
+    public void Follow(String UsuarioApuntado)
+    {
+        if(getUsuarioViaUsername(UsuarioApuntado) == null)
+        {}
+        else
+        {
+            if(EstaUsuarioEnSeguidos(UsuarioApuntado))
+            {}
+            else
+            {}
+        }
+    }
     
+    //De momento, solo se podran compartir publicaciones originales (sin compartir).
+    //Puede que este criterio cambie en siguientes commits
     @Override
-    public void Share()
-    {}
+    public void Share(int IdPublicacion, ArrayList<String> UsuariosDestino)
+    {
+        PublicacionOriginal PublicacionApuntada = getPublicacionViaId(IdPublicacion);
+        if(PublicacionApuntada == null)
+        {}
+        else
+        {
+            if(ValidarDestinos(UsuariosDestino))
+            {}
+            else
+            {}
+        }
+    }
     
     @Override
     public void Visualize()
-    {}
+    {PrintSocialNetwork(SocialNetworkToString());}
+    
+    //De momento, solo se podran comentar publicaciones originales (sin compartir).
+    //Puede que este criterio cambie en siguientes commits
+    @Override
+    public void Comment(int IdPublicacion, int IdComentario, String ContenidoComentario)
+    {
+        if(IdComentario > 0) //Buscar comentario
+        {}
+        else if(IdComentario == 0) //Buscar publicacion
+        {}
+        else
+        {}
+    }
     
     @Override
-    public void Comment()
-    {}
-    
-    @Override
-    public void Like()
-    {}
+    public void Like(int IdPublicacion, int IdComentario)
+    {
+        if(IdComentario > 0) //Buscar comentario
+        {}
+        else if(IdComentario == 0) //Buscar publicacion
+        {}
+        else
+        {}
+    }
 
 }

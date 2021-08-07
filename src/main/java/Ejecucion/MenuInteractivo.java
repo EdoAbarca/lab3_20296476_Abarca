@@ -167,11 +167,3 @@ public class MenuInteractivo
         }
     }
 }
-
-/*
-Evaluar el uso de:
- - Clases abstractas
- - Herencia
- - Polimorfismo
-*Probar luego de implementar base*
-*/
