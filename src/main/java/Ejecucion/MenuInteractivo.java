@@ -10,6 +10,7 @@ LO PRESENTADO EN ESTE COMMIT ESTA SUJETO A CAMBIOS
 */
 package Ejecucion;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -133,31 +134,225 @@ public class MenuInteractivo
                     }
                 }while(!ValidezEntrada);
                 
+                boolean ValidezEntero;
                 switch(OpcionEntrada)
                 {
                     case 1:
                         System.out.println("REALIZAR PUBLICACION (En proceso...).\n");
+                        ArrayList<String> DestinatariosPublicacion = new ArrayList<>();
+                        int CantidadDestinatarios = 0;
+                        String ContenidoPublicacion, DestinatarioTemp;
+                        System.out.println("Ingrese el contenido de la publicacion: ");
+                        ContenidoPublicacion = LecturaEntrada.nextLine();
+                        do
+                        {
+                            try
+                            {
+                                System.out.println("Ingrese la cantidad de destinatarios a asignar en la publicacion: ");
+                                CantidadDestinatarios = LecturaEntrada.nextInt();
+                                while(CantidadDestinatarios < 0)
+                                {       
+                                    System.out.println("Dominio fuera del permitido (Destinatarios < 0).\n");
+                                    System.out.println("Ingrese la cantidad de destinatarios a asignar en la publicacion: ");
+                                    CantidadDestinatarios = LecturaEntrada.nextInt();
+                                }
+                                ValidezEntero = true;
+                            }
+                            catch(InputMismatchException ex)
+                            {
+                                System.out.println("Cadena de carácteres no-convertible detectada. Es requerido el reingreso de datos.\n");
+                                LecturaEntrada.nextLine();
+                                ValidezEntero = false;
+                            }
+                        }while(!ValidezEntero);
+                        
+                        for(int i = 0; i < CantidadDestinatarios; i++)
+                        {
+                            System.out.println("Ingrese el destinatario nº"+i+": ");
+                            DestinatarioTemp = LecturaEntrada.nextLine();
+                            DestinatariosPublicacion.add(DestinatarioTemp);
+                        }
+                        //Llamado a metodo
+                        
                         break;
                     case 2:
                         System.out.println("SEGUIR USUARIO (En proceso...).\n");
+                        String UsuarioASeguir;
+                        System.out.println("Ingrese el nombre del usuario a seguir: ");
+                        UsuarioASeguir = LecturaEntrada.nextLine();
+                        //Llamado a metodo
+                        
                         break;
                     case 3:
                         System.out.println("COMPARTIR PUBLICACION (En proceso...).\n");
+                        int IdPublicacion, CantDestinatarios = 0;
+                        String DestinatarioActual;
+                        ArrayList<String> ListaDestinatarios = new ArrayList<>();
+                        do
+                        {
+                            try
+                            {
+                                System.out.println("Ingrese el ID de la publicacion a compartir: ");
+                                IdPublicacion = LecturaEntrada.nextInt();
+                                while(IdPublicacion < 0)
+                                {       
+                                    System.out.println("Dominio fuera del permitido (IdPublicacion < 0).\n");
+                                    System.out.println("Ingrese el ID de la publicacion a compartir: ");
+                                    IdPublicacion = LecturaEntrada.nextInt();
+                                }
+                                ValidezEntero = true;
+                            }
+                            catch(InputMismatchException ex)
+                            {
+                                System.out.println("Cadena de carácteres no-convertible detectada. Es requerido el reingreso de datos.\n");
+                                LecturaEntrada.nextLine();
+                                ValidezEntero = false;
+                            }
+                        }while(!ValidezEntero);
+                        do
+                        {
+                            try
+                            {
+                                System.out.println("Ingrese la cantidad de destinatarios a asignar en la publicacion: ");
+                                CantDestinatarios = LecturaEntrada.nextInt();
+                                while(CantDestinatarios < 0)
+                                {       
+                                    System.out.println("Dominio fuera del permitido (Destinatarios < 0).\n");
+                                    System.out.println("Ingrese la cantidad de destinatarios a asignar en la publicacion: ");
+                                    CantDestinatarios = LecturaEntrada.nextInt();
+                                }
+                                ValidezEntero = true;
+                            }
+                            catch(InputMismatchException ex)
+                            {
+                                System.out.println("Cadena de carácteres no-convertible detectada. Es requerido el reingreso de datos.\n");
+                                LecturaEntrada.nextLine();
+                                ValidezEntero = false;
+                            }
+                        }while(!ValidezEntero);
+                        
+                        for(int i = 0; i < CantDestinatarios; i++)
+                        {
+                            System.out.println("Ingrese el destinatario nº"+i+": ");
+                            DestinatarioActual = LecturaEntrada.nextLine();
+                            ListaDestinatarios.add(DestinatarioActual);
+                        }
+                        //Llamado a metodo
+                        
                         break;
+
                     case 4:
                         System.out.println("VISUALIZAR RED SOCIAL (En proceso...).\n");
+                        //Llamado a metodo
+                        
                         break;
                     case 5:
                         System.out.println("OPTATIVA: REALIZAR COMENTARIO (En proceso...).\n");
+                        int IdPublicacionAComentar, IdComentarioAResponder;
+                        String ContenidoComentario;
+                        do
+                        {
+                            try
+                            {
+                                System.out.println("Ingrese el ID de la publicacion a comentar: ");
+                                IdPublicacionAComentar = LecturaEntrada.nextInt();
+                                while(IdPublicacionAComentar < 0)
+                                {       
+                                    System.out.println("Dominio fuera del permitido (IdPublicacion < 0).\n");
+                                    System.out.println("Ingrese el ID de la publicacion a compartir: ");
+                                    IdPublicacionAComentar = LecturaEntrada.nextInt();
+                                }
+                                ValidezEntero = true;
+                            }
+                            catch(InputMismatchException ex)
+                            {
+                                System.out.println("Cadena de carácteres no-convertible detectada. Es requerido el reingreso de datos.\n");
+                                LecturaEntrada.nextLine();
+                                ValidezEntero = false;
+                            }
+                        }while(!ValidezEntero);
+                        do
+                        {
+                            try
+                            {
+                                System.out.println("Ingrese el comentario a responder (de la publicacion): ");
+                                IdComentarioAResponder = LecturaEntrada.nextInt();
+                                while(IdComentarioAResponder < 0)
+                                {       
+                                    System.out.println("Dominio fuera del permitido (IdComentario < 0).\n");
+                                    System.out.println("Ingrese el comentario a responder (de la publicacion): ");
+                                    IdComentarioAResponder = LecturaEntrada.nextInt();
+                                }
+                                ValidezEntero = true;
+                            }
+                            catch(InputMismatchException ex)
+                            {
+                                System.out.println("Cadena de carácteres no-convertible detectada. Es requerido el reingreso de datos.\n");
+                                LecturaEntrada.nextLine();
+                                ValidezEntero = false;
+                            }
+                        }while(!ValidezEntero);
+                        System.out.println("Ingresa el contenido del comentario: ");
+                        ContenidoComentario = LecturaEntrada.nextLine();
+                        //Llamado a metodo
+                        
                         break;
+                        
                     case 6:
                         System.out.println("OPTATIVA: DAR LIKE (En proceso...).\n");
+                        int IdPublicacionADarLike, IdComentarioADarLike;
+                        do
+                        {
+                            try
+                            {
+                                System.out.println("Ingrese el ID de la publicacion a comentar: ");
+                                IdPublicacionADarLike = LecturaEntrada.nextInt();
+                                while(IdPublicacionADarLike < 0)
+                                {       
+                                    System.out.println("Dominio fuera del permitido (IdPublicacion < 0).\n");
+                                    System.out.println("Ingrese el ID de la publicacion a compartir: ");
+                                    IdPublicacionADarLike = LecturaEntrada.nextInt();
+                                }
+                                ValidezEntero = true;
+                            }
+                            catch(InputMismatchException ex)
+                            {
+                                System.out.println("Cadena de carácteres no-convertible detectada. Es requerido el reingreso de datos.\n");
+                                LecturaEntrada.nextLine();
+                                ValidezEntero = false;
+                            }
+                        }while(!ValidezEntero);
+                        do
+                        {
+                            try
+                            {
+                                System.out.println("Ingrese el comentario a responder (de la publicacion): ");
+                                IdComentarioADarLike = LecturaEntrada.nextInt();
+                                while(IdComentarioADarLike < 0)
+                                {       
+                                    System.out.println("Dominio fuera del permitido (IdComentario < 0).\n");
+                                    System.out.println("Ingrese el comentario a responder (de la publicacion): ");
+                                    IdComentarioADarLike = LecturaEntrada.nextInt();
+                                }
+                                ValidezEntero = true;
+                            }
+                            catch(InputMismatchException ex)
+                            {
+                                System.out.println("Cadena de carácteres no-convertible detectada. Es requerido el reingreso de datos.\n");
+                                LecturaEntrada.nextLine();
+                                ValidezEntero = false;
+                            }
+                        }while(!ValidezEntero);
                         break;
                     case 7:
                         System.out.println("CERRAR SESION.\n");
+                        //Llamado a metodo
+                        
                         break;
                     case 8:
                         System.out.println("FINALIZAR PROGRAMA.\n");
+                        //Llamado a metodo
+                        
                         break;
                     default:
                         System.out.println("Opcion ingresada fuera del dominio presentado.\n");
