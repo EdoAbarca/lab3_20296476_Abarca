@@ -1,12 +1,11 @@
 package ClasesAbstraidas;
 
-import Moldes.Publicacion;
 import java.util.ArrayList;
 
 /**
  * Clase Usuario. Esta clase tiene por objetivo representar un usuario en una red social.
  * 
- * @version 1.3, 15/07/2021
+ * @version 1.4, 07/08/2021
  * @author Eduardo Abarca
  */
 public class Usuario
@@ -16,9 +15,10 @@ public class Usuario
     private final int IdUsuario;
     private final String NombreUsuario;
     private final String Contrasenia;
-    private ArrayList<String> ListaSeguidos;
-    private ArrayList<String> ListaSeguidores;
-    private ArrayList<Publicacion> ListaPublicacionesUsuario;
+    private final ArrayList<String> ListaSeguidos;
+    private final ArrayList<String> ListaSeguidores;
+    ArrayList<PublicacionOriginal> PublicacionesUsuario;
+    ArrayList<PublicacionCompartida> PublicacionesCompartidas;
     
     /* //////////////////////////////////////////////////// METODOS //////////////////////////////////////////////////// */
     
@@ -31,7 +31,8 @@ public class Usuario
         this.Contrasenia = ContraseniaARegistrar;
         this.ListaSeguidos = new ArrayList<>();
         this.ListaSeguidores = new ArrayList<>();
-        this.ListaPublicacionesUsuario = new ArrayList<>();
+        this.PublicacionesUsuario = new ArrayList<>();
+        this.PublicacionesCompartidas = new ArrayList<>();
     }
     
     /* GETTERS */
@@ -44,23 +45,47 @@ public class Usuario
     public String getContrasenia()
     {return this.Contrasenia;}
     
-    /*
-    public Publicacion getPublicacionPorId(int id)
+    public ArrayList<String> getListaSeguidos()
+    {return this.ListaSeguidos;}
+    
+    public ArrayList<String> getListaSeguidores()
+    {return this.ListaSeguidores;}
+    
+    public ArrayList<PublicacionOriginal> getPublicaciones()
+    {return this.PublicacionesUsuario;}
+    
+    public ArrayList<PublicacionCompartida> getPublicacionesCompartidas()
+    {return this.PublicacionesCompartidas;}
+
+    public int getPublicacionOriginalPorId(int id)
     {
-        Publicacion PublicacionRetorno = null;
-        for(int i = 0; i < this.ListaPublicacionesUsuario.size(); i++)
+        int indicePublicacionRetorno = -1;
+        for(int i = 0; i < this.PublicacionesUsuario.size(); i++)
         {
-            if(this.ListaPublicacionesUsuario.get(i).getIdP() == id)
-            {PublicacionRetorno = this.ListaPublicacionesUsuario.get(i);}
+            if(this.PublicacionesUsuario.get(i).getIdPublicacion() == id)
+            {indicePublicacionRetorno = i;}
         }
-        return PublicacionRetorno;
-    }*/
+        return indicePublicacionRetorno;
+    }
+    
+    public int getPublicacionCompartidaPorId(int id)
+    {
+        int indicePublicacionRetorno = -1;
+        for(int i = 0; i < this.PublicacionesCompartidas.size(); i++)
+        {
+            if(this.PublicacionesCompartidas.get(i).getIdPublicacion() == id)
+            {indicePublicacionRetorno = i;}
+        }
+        return indicePublicacionRetorno;
+    }
+    
     
     /* SETTERS */
+    //Sin setters
     
     /* METODOS ADICIONALES */
     
-    public boolean estaSeguido(String Usuario)
+    public boolean EstaEnSeguidos(String Usuario)
     {
         boolean resultado = false;
         for(int i = 0; i < this.ListaSeguidos.size(); i++)
@@ -71,21 +96,11 @@ public class Usuario
         return resultado;
     }
     
-    public void agregarSeguimiento(String Usuario)
+    public void AgregarSeguimiento(String Usuario)
     {this.ListaSeguidos.add(Usuario);}
     
-    public boolean estaSeguidor(String Usuario)
-    {
-        boolean resultado = false;
-        for(int i = 0; i < this.ListaSeguidores.size(); i++)
-        {
-            if(this.ListaSeguidos.get(i).equals(Usuario))
-            {resultado = true;}
-        }
-        return resultado;
-    }
     
-    public void agregarSeguidor(String Usuario)
+    public void AgregarSeguidor(String Usuario)
     {this.ListaSeguidores.add(Usuario);}
     
     public boolean EstanDestinosEnContactos(ArrayList<String> ListaUsuariosDestino)
@@ -111,19 +126,53 @@ public class Usuario
         return EstanDestinos;
     }
     
-    /*
+    
+    public String ListaSeguidosAString()
+    {
+        String StringSeguidos = "";
+        if(this.ListaSeguidos.isEmpty())
+        {StringSeguidos += "SIN SEGUIDOS.\n\n";}
+        else
+        {
+            for(int i = 0; i < this.ListaSeguidos.size(); i++)
+            {StringSeguidos+=this.ListaSeguidos.get(i)+"\n";}
+        }
+        return StringSeguidos;
+    }
+    
+    public String ListaSeguidoresAString()
+    {
+        String StringSeguidores = "";
+        if(this.ListaSeguidores.isEmpty())
+        {StringSeguidores += "SIN SEGUIDORES.\n\n";}
+        else
+        {
+            for(int i = 0; i < this.ListaSeguidores.size(); i++)
+            {StringSeguidores+=this.ListaSeguidores.get(i)+"\n";}
+        }
+        return StringSeguidores;
+    }
+    
     public String UsuarioAString()
     {
         String StringDatosUsuario, StringPublicacionesUsuario;
-        StringDatosUsuario = "Id usuario: "+ Integer.toString(this.IdUsuario) + "\nUsuario: "+ this.NombreUsuario;
-        StringPublicacionesUsuario = "\n\nPUBLICACIONES USUARIO:\n";
-        if(this.ListaPublicacionesUsuario.isEmpty())
-        {StringPublicacionesUsuario+= "Sin publicaciones.\n\n";}
+        StringDatosUsuario = "\nId usuario: "+ Integer.toString(this.IdUsuario) + " - Nombre usuario: "+ this.NombreUsuario+"\n\nSeguidos:\n\n"+ListaSeguidosAString()+"\n\nSeguidores:\n\n"+ListaSeguidoresAString();
+        StringPublicacionesUsuario = "\n\nPUBLICACIONES USUARIO:\n\n";
+        if(this.PublicacionesUsuario.isEmpty())
+        {StringPublicacionesUsuario+= "SIN PUBLICACIONES CREADAS.\n\n";}
         else
         {
-            for(int i = 0; i < this.ListaPublicacionesUsuario.size(); i++)
-            {StringPublicacionesUsuario += this.ListaPublicacionesUsuario.get(i).publicacionAString();}
+            for(int i = 0; i < this.PublicacionesUsuario.size(); i++)
+            {StringPublicacionesUsuario += this.PublicacionesUsuario.get(i).PublicacionAString();}
+        }
+        StringPublicacionesUsuario += "\n\nPUBLICACIONES COMPARTIDAS POR OTROS USUARIOS:\n\n";
+        if(this.PublicacionesCompartidas.isEmpty())
+        {StringPublicacionesUsuario+= "SIN PUBLICACIONES COMPARTIDAS POR PARTE DE OTROS USUARIOS.\n\n";}
+        else
+        {
+            for(int i = 0; i < this.PublicacionesCompartidas.size(); i++)
+            {StringPublicacionesUsuario += this.PublicacionesCompartidas.get(i).PublicacionAString();}
         }
         return StringDatosUsuario + StringPublicacionesUsuario;
-    }*/
+    }
 }

@@ -1,9 +1,11 @@
 package Moldes;
 
+import java.util.ArrayList;
+
 /**
  * Clase Publicacion. Esta clase tiene por objetivo representar una publicacion en una red social.
  * Clase abstracta, contendra los atributos y metodos a heredar en las clases "PublicacionOriginal" y "PublicacionCompartida"
- * @version 1.4, 16/07/2021
+ * @version 1.5, 07/08/2021
  * @author Eduardo Abarca
  */
 public abstract class Publicacion
@@ -15,12 +17,12 @@ public abstract class Publicacion
     protected final String TipoPublicacion;
     protected final String ContenidoPublicacion;
     protected final String AutorPublicacion;
-    protected final String CuentaDirigida;
+    protected final ArrayList<String> UsuariosDirigidos;
     
     /* //////////////////////////////////////////////////// METODOS //////////////////////////////////////////////////// */
     
     /* CONSTRUCTOR */
-    public Publicacion(String Fecha, String Usuario, String Tipo, String Contenido, String Destino)
+    public Publicacion(String Fecha, String Usuario, String Tipo, String Contenido, ArrayList<String> Destinos)
     {
         this.IdPublicacion = IdCorrelativoPublicaciones;
         IdCorrelativoPublicaciones++;
@@ -28,7 +30,7 @@ public abstract class Publicacion
         this.AutorPublicacion = Usuario;
         this.TipoPublicacion = Tipo;
         this.ContenidoPublicacion = Contenido;
-        this.CuentaDirigida = Destino;
+        this.UsuariosDirigidos = Destinos;
     }
     
     /* GETTERS */
@@ -47,17 +49,27 @@ public abstract class Publicacion
     public String getContenidoPublicacion()
     {return this.ContenidoPublicacion;}
     
-    public String getCuentaDirigida()
-    {return this.CuentaDirigida;}
+    public ArrayList<String> getUsuariosDirigidos()
+    {return this.UsuariosDirigidos;}
+    
+    public abstract int getComentarioViaIdReaccion(int id);
     
     /* SETTERS */
-    // Sin setters de momento...
+    // Sin setters.
     
     /* METODOS ADICIONALES */
-    // Sin metodos adicionales de momento...
+    
+    public abstract String ListaDestinosAString();
+    
+    public abstract String LikesPublicacionAString();
+    
+    public abstract String ComentariosPublicacionAString();
+    
+    public abstract String PublicacionAString();
     
     /*
-    Â¿Por que esta clase no tiene como atributos un contenedor (ArrayList) de likes y publicaciones?
+    ¿Por que esta clase no tiene como atributo un contenedor (ArrayList) de likes y publicaciones?
     Las clases a heredar deben tener sus PROPIOS contenedores. (Consultar de todos modos por este conflicto)
     */
+    
 }
