@@ -8,7 +8,7 @@ Seccion: C-3
 Profesor: Daniel Gacitua
 Entrega: Original (12/08/2021)
 
-VERSION FINAL
+ENTREGA FINAL
 */
 
 
@@ -20,7 +20,7 @@ import java.util.Scanner;
 /**
  * Clase Menu.
  * Esta clase tiene por objetivo mostrar los menus interactivos para ejecutar los metodos que respectan a los requerimientos funcionales exigidos por enunciado.
- * @version 1.4, 11/08/2021
+ * @version 1.4, 10/08/2021
  * @author Eduardo Abarca
  */
 public class MenuInteractivo
@@ -59,7 +59,7 @@ public class MenuInteractivo
                 while(OpcionMenu < 0 || OpcionMenu > 1)
                 {       
                     System.out.println("Opcion invalida.\n\n");
-                    System.out.println("Desea cargar la actividad previa a esta ejecucion?\n- Si� (ingrese 1)\n- No (ingrese 0)\nOPCION: ");
+                    System.out.println("Desea cargar la actividad previa a esta ejecucion?\n- Si (ingrese 1)\n- No (ingrese 0)\nOPCION: ");
                 }
                 //Entrada es valida
                 ValidezEntradaMenu = true;

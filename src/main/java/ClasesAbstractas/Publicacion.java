@@ -106,7 +106,7 @@ public abstract class Publicacion
     
     /*
     Por que esta clase no tiene como atributo un contenedor (ArrayList) de likes y publicaciones?
-    Las clases a heredar deben tener sus PROPIOS contenedores. (Consultar de todos modos por este conflicto)
+    Las clases a heredar deben tener sus PROPIOS contenedores.
     */
     
 }
