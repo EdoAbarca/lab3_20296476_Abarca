@@ -1,12 +1,12 @@
 package ClasesAbstraidas;
 
-import Moldes.Publicacion;
+import ClasesAbstractas.Publicacion;
 import java.util.ArrayList;
 
 /**
  * Clase PubicacionCompartida. Esta clase tiene por objetivo representar el resultado de compartir una publicacion en una red social.
  * Clase hija de "Publicacion"
- * @version 1.2, 07/08/2021
+ * @version 1.3, 10/08/2021
  * @author Eduardo Abarca
  */
 public class PublicacionCompartida extends Publicacion
@@ -16,12 +16,22 @@ public class PublicacionCompartida extends Publicacion
     private final String FechaComparte;
     private final String UsuarioQueComparte;
     private final String UsuarioDestinoComparte;
-    ArrayList<Like> LikesPublicacionComp;
-    ArrayList<Comentario> ComentariosPublicacionComp;
+    final ArrayList<Like> LikesPublicacionComp;
+    final ArrayList<Comentario> ComentariosPublicacionComp;
     
     /* //////////////////////////////////////////////////// METODOS //////////////////////////////////////////////////// */
     
     /* CONSTRUCTOR */
+
+    /**
+     * Constructor para PublicacionCompartida
+     * @param P Publicacion original compartida
+     * @param IdP ID publicacion compartida
+     * @param FechaC Fecha en la que se compartio la publicacion
+     * @param Comparte Usuario que comparte la publicacion
+     * @param DestinoComparte Usuario al que se le compartio la publicacion
+     */
+
     public PublicacionCompartida(PublicacionOriginal P, int IdP, String FechaC, String Comparte, String DestinoComparte)
     {
         super(P.getFechaPublicacion(), P.getAutorPublicacion(), P.getTipoPublicacion(), P.getContenidoPublicacion(), P.getUsuariosDirigidos());
@@ -34,30 +44,29 @@ public class PublicacionCompartida extends Publicacion
     }
     
     /* GETTERS */
-    public int getIdPublicacionCompartida()
-    {return this.IdPublicacionCompartida;}
     
-    public String getFechaComparte()
-    {return this.FechaComparte;}
-    
-    public String getUsuarioQueComparte()
-    {return this.UsuarioQueComparte;}
-    
-    public String getUsuarioDestinoComparte()
-    {return this.UsuarioDestinoComparte;}
-    
+    /**
+     * Getter de indice comentario mediante ID reaccion
+     * @param id ID comentario
+     * @return Indice (posicion) comentario apuntado
+     */
     @Override
     public int getComentarioViaIdReaccion(int id)
     {
         int IndiceComentario = -1;
+        
+        //Se revisa ArrayList de comentarios
         for(int i = 0; i < this.ComentariosPublicacionComp.size(); i++)
         {
+            //Se encontro comentario con ID ingresado, se guarda indice y se corta ciclo for
             if(this.ComentariosPublicacionComp.get(i).getIdReaccion() == id)
             {
                 IndiceComentario = i;
                 break;
             }
         }
+        
+        //Se retorna resultado
         return IndiceComentario;
     }
     
@@ -65,52 +74,86 @@ public class PublicacionCompartida extends Publicacion
     // Sin setters.
     
     /* METODOS ADICIONALES */
- 
+
+    /**
+     * Metodo que transforma la lista de destinos a un string
+     * @return String con los usuarios dirigidos (String)
+     */
     @Override
     public String ListaDestinosAString()
     {
+        //String salida
         String StringDestinos = "";
+        
+        //Si la lista esta vacia, se agrega mensaje por defecto
         if(this.UsuariosDirigidos.isEmpty())
-        {
-            StringDestinos += "SIN DESTINATARIOS.\n";
-        }
+        {StringDestinos += "SIN DESTINATARIOS.\n";}
+        
+        //Caso contrario, se procesa cada destino
         else
         {
             for(int i = 0; i < this.UsuariosDirigidos.size(); i++)
             {StringDestinos += this.UsuariosDirigidos.get(i)+"\n";}
         }
+        
+        //Se retorna string con la informacion
         return StringDestinos;
     }
        
-
+    /**
+     * Metodo que transforma el ArrayList de likes a un string
+     * @return String con la informacion de los likes en publicacion compartida (String)
+     */
     @Override
     public String LikesPublicacionAString()
     {
+        //String salida
         String StringLikes = "";
+        
+        //Si no hay likes, se deja mensaje por defecto
         if(this.LikesPublicacionComp.isEmpty())
         {StringLikes += "SIN LIKES.\n";}
+        
+        //Caso contrario, se procesa cada like en la publicacion
         else
         {
             for(int i = 0; i < this.LikesPublicacionComp.size(); i++)
             {StringLikes += this.LikesPublicacionComp.get(i).ReaccionAString();}
         }
+        
+        //Se retorna string con la informacion
         return StringLikes;
     }
 
+    /**
+     * Metodo que transforma el ArrayList de comentarios a un string
+     * @return String con la informacion de los comentarios en la publicacion (String)
+     */
     @Override
     public String ComentariosPublicacionAString()
     {
+        //String salida
         String StringComentarios = "";
+        
+        //Si no hay comentarios, se deja mensaje por defecto
         if(this.ComentariosPublicacionComp.isEmpty())
         {StringComentarios += "SIN COMENTARIOS.\n";}
+        
+        //Caso contrario, se procesa cada comentario en la publicacion
         else
         {
             for(int i = 0; i < this.ComentariosPublicacionComp.size(); i++)
             {StringComentarios += this.ComentariosPublicacionComp.get(i).ReaccionAString();}
         }
+        
+        //Se retorna string con la informacion
         return StringComentarios;
     }
     
+    /**
+     * Metodo que transforma toda la informacion de la publicacion a un string
+     * @return String con la informacion de la publicacion compartida (String)
+     */
     @Override
     public String PublicacionAString()
     {

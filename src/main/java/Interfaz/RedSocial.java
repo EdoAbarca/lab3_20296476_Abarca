@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Clase RedSocial. Esta clase tiene por objetivo representar una red social generica.
  * Aca se encontraran los atributos basicos de una red social, como los metodos necesarios para poder interactuar en ella.
- * @version 1.4, 07/08/2021
+ * @version 1.5, 10/08/2021
  * @author Eduardo Abarca
  */
 public interface RedSocial
@@ -14,8 +14,9 @@ public interface RedSocial
     // Sin atributos.
     
     /* //////////////////////////////////////////////////// METODOS //////////////////////////////////////////////////// */
-
-   /* //////////////////////////////////////////////// METODOS DE APOYO //////////////////////////////////////////////// */
+    
+    /* //////////////////////////////////////////////// METODOS DE APOYO //////////////////////////////////////////////// */
+    //A comentar en clase que implemente esta interfaz.
     
     public void IniciarPrograma();
     
@@ -33,7 +34,13 @@ public interface RedSocial
     
     public int getUsuarioViaUsername(String NombreUsuario);
     
-    public boolean ValidarDestinos(ArrayList<String> ListaUsuariosDestino);
+    public int ReferenciarUsuarioPublicacionOr(int id);
+    
+    public int ReferenciarUsuarioPublicacionComp(int id);
+    
+    public int CantidadUsuariosRegistrados();
+    
+    public boolean ValidarDestinos(ArrayList<String> ListaDestinos);
     
     public String SocialNetworkToString();
     

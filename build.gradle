@@ -3,7 +3,7 @@ apply plugin: 'jacoco'
 apply plugin: 'application'
 
 
-mainClassName = 'LabJavaParadigmas_v2.Menu'
+mainClassName = 'Ejecucion.MenuInteractivo'
 
 repositories {
     mavenCentral()
